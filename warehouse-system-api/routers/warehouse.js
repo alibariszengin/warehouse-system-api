@@ -12,7 +12,7 @@ router.post("/",getAccessToRoute,addWarehouse);
 
 router.get("/all",getAllWarehouses);
 
-router.get("/:warehouseId",getAccessToRoute,getWarehouseInfo);
+router.get("/:warehouseId",getAccessToRoute,checkWarehouseExist,getWarehouseInfo);
 router.delete("/:warehouseId",getAccessToRoute,checkWarehouseExist,deleteWarehouse);
 
 router.post("/search",searchWarehouse);
