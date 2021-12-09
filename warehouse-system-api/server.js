@@ -20,7 +20,8 @@ dotenv.config({
 connectDatabase();
 
 const app = express();
-const PORT =process.env.PORT;
+const host = '0.0.0.0';
+const PORT =process.env.PORT || 5000;
 //Express - Body Middleware
 app.use(cors());
 app.use(express.json()); // Req body ' i json olarak almak için
@@ -33,6 +34,6 @@ app.use(customErrorHandler);
 // Static Files
 
 app.use(express.static(path.join(__dirname, "public")));
-app.listen(PORT,() =>{
+app.listen(PORT,host,() =>{
     console.log(`App Started on ${PORT} : ${process.env.NODE_ENV}`);
 });
