@@ -92,8 +92,8 @@ const htmlEmailTemplate = (resetPasswordUrl) =>{
     <td>
     <table align="center" cellpadding="0" cellspacing="0" class="footer-center" style="text-align: left; width: 100%; padding-left: 120px; padding-right: 120px;">
     <tbody><tr>
-    <td colspan="2" style="padding-top: 72px; padding-bottom: 24px; width: 100%;">
-    <h2 style="width: 124px; height: 20px">Warehousu-System-API</h2>
+    <td colspan="5" style="padding-top: 72px; padding-bottom: 24px; width: 100%;">
+    <h2 style="width: 124px; height: 20px">Warehouse-System-API</h2>
     </td>
     </tr>
     <tr>
