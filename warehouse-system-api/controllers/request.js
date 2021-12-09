@@ -88,7 +88,9 @@ const respondRequest = asyncErrorWrapper( async(req, res, next) =>{
         }
         console.log(products)
         const req ={
-            body:products,
+            body:{
+                products:products
+            },
             data:request.to.warehouse
         }
             

@@ -27,7 +27,7 @@ const getWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
 
 const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
   // const {id} = req.params;
-  const products = req.body;
+  const {products} = req.body;
   const warehouse = req.data;
   const warehouseId =warehouse._id || warehouse
   if (Object.keys(req.body).length === 0) {
