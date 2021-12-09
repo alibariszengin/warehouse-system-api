@@ -93,7 +93,7 @@ const htmlEmailTemplate = (resetPasswordUrl) =>{
     <table align="center" cellpadding="0" cellspacing="0" class="footer-center" style="text-align: left; width: 100%; padding-left: 120px; padding-right: 120px;">
     <tbody><tr>
     <td colspan="2" style="padding-top: 72px; padding-bottom: 24px; width: 100%;">
-    <img src="https://thumbs.dreamstime.com/z/warehouse-text-written-green-grungy-round-stamp-vintage-220985119.jpg" style="width: 124px; height: 20px">
+    <img src="https://w7.pngwing.com/pngs/742/512/png-transparent-the-warehouse-group-retail-business-warehouse-miscellaneous-text-retail.png" >
     </td>
     </tr>
     <tr>
