@@ -2,6 +2,7 @@ const Request = require("../../models/Request");
 const Product = require("../../models/Product");
 const Warehouse = require("../../models/Warehouse");
 const CustomError = require("../../helpers/error/CustomError");
+const sendProducts = require("../../helpers/product/product-transfer");
 const asyncErrorWrapper = require("express-async-handler");
 
 
@@ -9,9 +10,10 @@ const checkHasEnoughProduct =asyncErrorWrapper(async(req, res ,next) => {
 
     const {products}= req.body;
     const {from,to} = req.params;
+    
     const warehouse = await Warehouse.findById(from).populate("products");
     const warehouseTo = await Warehouse.findById(to).populate("products");
-    console.log(warehouse.products)
+    
     if((!warehouse) || (!warehouseTo) ){
         return next(new CustomError("There is no such warehouse with that id",400));
     }
@@ -62,7 +64,7 @@ const checkHasEnoughProduct =asyncErrorWrapper(async(req, res ,next) => {
                 return docs;
             }
         });
-  
+    
         product.stock-=value;
         product.reserved+=Number(value);
     

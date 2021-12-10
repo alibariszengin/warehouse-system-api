@@ -5,7 +5,6 @@ const CustomError = require("../helpers/error/CustomError");
 const asyncErrorWrapper = require("express-async-handler");
 const { sendJwtToClient } = require("../helpers/authorization/tokenHelpers.js");
 const { validateUserInput, comparePassword} = require("../helpers/input/inputHelpers.js");
-const { htmlEmailTemplate} = require("../helpers/authorization/emailHelpers.js");
 const sendEmail = require("../helpers/libraries/sendEmail");
 
 const register =asyncErrorWrapper(async(req, res ,next) => {
@@ -89,7 +88,11 @@ const forgotPassword=asyncErrorWrapper(async(req, res ,next) =>{
     console.log("4")
     const resetPasswordUrl = `http://localhost:3000/resetpassword?resetPasswordToken=${resetPasswordToken}`
     console.log("5")
-    const emailTemplate = htmlEmailTemplate(resetPasswordUrl)
+    const emailTemplate = `
+        <h3>Reset Your Password</h3>
+        <p> This <a href='${resetPasswordUrl}' target='_blank'>link</a> will expire in 1 hour.</p>
+    `;
+
     try{
         await sendEmail({
             from : process.env.SMTP_USER,

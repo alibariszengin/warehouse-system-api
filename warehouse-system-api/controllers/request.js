@@ -25,7 +25,8 @@ const getUserFromRequest = asyncErrorWrapper( async(req, res, next) =>{
     console.log(id)
     const userFromRequest = await Request.find({'from.user':id});
     // userFromRequest.find("from.warehouse._id")
-  
+    const warehouse = await Warehouse.find({user:id});
+    console.log(userFromRequest);
 
 
 
@@ -43,6 +44,9 @@ const getUserToRequest = asyncErrorWrapper( async(req, res, next) =>{
     console.log(id)
     const userToRequest = await Request.find({'to.user':id});
     // userFromRequest.find("from.warehouse._id")
+    const warehouse = await Warehouse.find({user:id});
+    console.log(userToRequest);
+
 
 
     return res.status(200)
@@ -88,9 +92,7 @@ const respondRequest = asyncErrorWrapper( async(req, res, next) =>{
         }
         console.log(products)
         const req ={
-            body:{
-                products:products
-            },
+            body:products,
             data:request.to.warehouse
         }
             

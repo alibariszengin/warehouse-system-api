@@ -20,7 +20,7 @@ const checkUserExist =asyncErrorWrapper(async(req, res ,next) => {
 const checkWarehouseExist =asyncErrorWrapper(async(req, res ,next) => {
 
     const {warehouseId} = req.params;
-   
+    console.log(warehouseId)
     try{
         mongodb.ObjectId(warehouseId);
     }
