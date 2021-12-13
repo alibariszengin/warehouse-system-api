@@ -58,21 +58,30 @@ const addWarehouse = asyncErrorWrapper(async (req, res, next) => {
   if (Object.keys(req.body).length === 0) {
     return next(new CustomError("There is no warehouse info", 400));
   }
-
-  const warehouse = await Warehouse.create({
-    ...req.body,
+  const request = await Request.create({
+    from : {user: req.user.id},
+    warehouseInfo : req.body,
+    type: "create"
+     
   });
-  warehouse.user = user._id;
-  await warehouse.save();
-  console.log(warehouse);
-  user.warehouses.push(warehouse.populate("user"));
-  await user.save();
-  console.log(user.warehouses);
+   return res.status(200).json({
+     success: true,
+     message: "Warehouse create request taken"
+   });
+  // const warehouse = await Warehouse.create({
+  //   ...req.body,
+  // });
+  // warehouse.user = user._id;
+  // await warehouse.save();
+  // console.log(warehouse);
+  // user.warehouses.push(warehouse.populate("user"));
+  // await user.save();
+  // console.log(user.warehouses);
 
-  return res.status(200).json({
-    success: true,
-    data: warehouse,
-  });
+  // return res.status(200).json({
+  //   success: true,
+  //   data: warehouse,
+  // });
 });
 
 const deleteWarehouse = asyncErrorWrapper(async (req, res, next) => {

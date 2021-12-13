@@ -13,6 +13,9 @@ const RequestSchema = new Schema({
         enum:["refused","waiting","accepted"]
         
     },
+    warehouseInfo:{
+        type:Object
+    },
     from:{
         user:{
             type: Schema.Types.ObjectId,

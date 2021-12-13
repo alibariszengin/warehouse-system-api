@@ -1,5 +1,6 @@
 const Request =require("../models/Request");
 const Warehouse =require("../models/Warehouse");
+const User =require("../models/User");
 const Product =require("../models/Product");
 const CustomError = require('../helpers/error/CustomError');
 const asyncErrorWrapper = require("express-async-handler");
@@ -54,6 +55,56 @@ const getUserToRequest = asyncErrorWrapper( async(req, res, next) =>{
 
 });
 
+const getCreateRequest = asyncErrorWrapper( async(req, res, next) =>{
+    const request = await Request.find({'type':'create'});
+    return res.status(200)
+    .json({
+        success: true,
+        data: request
+    });
+});
+const respondCreate = asyncErrorWrapper( async(req, res, next) =>{
+    const {id} = req.params
+    const {status} = req.body;
+    const request = await Request.findById(id);
+    if(!id){
+        return next(new CustomError("None request id parameter ",400));
+    }
+    if(request.status !=="waiting"){
+        return next(new CustomError("This request already responded ",400));
+    }
+    
+    if(status){
+        request.status = "accepted";
+        const warehouse = await Warehouse.create({
+               ...request.warehouseInfo
+        });
+        if(!warehouse){
+            return next(new CustomError("Warehouse can not could not created",400));
+        }
+
+        const user = await User.findById(request.from.user);
+        warehouse.user = user._id;
+        await warehouse.save();
+        console.log(warehouse);
+        user.warehouses.push(warehouse.populate("user"));
+        await user.save();
+        console.log(user.warehouses);
+        await request.save();
+        return res.status(200).json({
+            success: true,
+            data: warehouse,
+        });
+    }
+    else{
+        request.status = "refused";
+        await request.save();
+        return res.status(200).json({
+            success: true,
+            message: "Warehouse create refused from admin"
+        });
+    }
+});
 const respondRequest = asyncErrorWrapper( async(req, res, next) =>{
     const {id} = req.params;
     const {status} = req.body;
@@ -122,9 +173,12 @@ const respondRequest = asyncErrorWrapper( async(req, res, next) =>{
 
     
 });
+
 module.exports={
     getAllRequest,
     getUserFromRequest,
     getUserToRequest,
-    respondRequest
+    respondRequest,
+    getCreateRequest,
+    respondCreate
 }

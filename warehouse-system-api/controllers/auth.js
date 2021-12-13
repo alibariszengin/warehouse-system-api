@@ -15,9 +15,7 @@ const register =asyncErrorWrapper(async(req, res ,next) => {
     // async,await 
    
     const user = await User.create({
-        name,
-        email,
-        password
+        ...req.body
      
     });
     sendJwtToClient(user, res);
@@ -61,13 +59,15 @@ const logout =asyncErrorWrapper(async(req, res ,next) =>{
     })
 });
 
-const getUser= (req, res ,next) => {
-
-    res.json({
+const getUser= asyncErrorWrapper(async(req, res ,next) => {
+    const user = await User.findById(req.user.id);
+    return res.status(200)
+    .json({
         success:true,
-        data: req.user
-    });
-}
+        data: user
+   
+    })
+});
 
 
 // Forgot Password
