@@ -20,7 +20,9 @@ dotenv.config({
 connectDatabase();
 
 const app = express();
-const host = "0.0.0.0"
+
+const host = '0.0.0.0';
+
 const PORT =process.env.PORT || 5000;
 //Express - Body Middleware
 app.use(cors());

@@ -27,9 +27,11 @@ const getWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
 
 const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
   // const {id} = req.params;
-  const products = req.body;
+  const {products} = req.body;
+  console.log(products)
   const warehouse = req.data;
   const warehouseId =warehouse._id || warehouse
+  console.log(warehouseId)
   if (Object.keys(req.body).length === 0) {
     return next(new CustomError("There is no warehouse info", 400));
   }
@@ -41,14 +43,15 @@ const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
     if (getProduct) {
       getProduct.stock += data.amount;
       await getProduct.save();
-      console.log("ürün halihazırda var")
+      console.log("ürün halihazirda var")
       console.log(getProduct)
     } else {
       console.log("ürün ilk defa ekleniyor")
   
-      data.stock=data.amount;
+      
       const product = await Product.create({
           ...data,
+          stock:data.amount
       });
       
       
@@ -83,7 +86,6 @@ const transferProduct = asyncErrorWrapper(async (req, res, next) => {
       message: "Request has been taken successfully",
     });
   });
-
 module.exports = {
   getAllProduct,
   getWarehouseProduct,
