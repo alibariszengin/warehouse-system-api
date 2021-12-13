@@ -65,10 +65,7 @@ const getUser= (req, res ,next) => {
 
     res.json({
         success:true,
-        data: {
-            id: req.user.id,
-            name : req.user.name
-        }
+        data: req.user
     });
 }
 

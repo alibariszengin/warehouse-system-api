@@ -18,7 +18,8 @@ const checkHasEnoughProduct =asyncErrorWrapper(async(req, res ,next) => {
 
     const request = await Request.create({
         from : {warehouse :warehouse,user: req.user.id},
-        to : {warehouse :to, user : warehouseTo.user}
+        to : {warehouse :to, user : warehouseTo.user},
+        type: "transport"
          
     });
 
