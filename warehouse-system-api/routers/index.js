@@ -6,6 +6,7 @@ const admin = require("./admin");
 const warehouse = require("./warehouse");
 const product = require("./product");
 const request = require("./request");
+
 // /api
 const router = express.Router();
 

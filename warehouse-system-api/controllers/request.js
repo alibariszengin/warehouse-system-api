@@ -3,6 +3,7 @@ const Warehouse =require("../models/Warehouse");
 const User =require("../models/User");
 const Product =require("../models/Product");
 const CustomError = require('../helpers/error/CustomError');
+const {getDistanceFromMaps} = require('../helpers/google/distance.js');
 const asyncErrorWrapper = require("express-async-handler");
 const {addWarehouseProduct} = require("./product")
 const getAllRequest =asyncErrorWrapper( async(req, res, next) =>{
@@ -174,11 +175,27 @@ const respondRequest = asyncErrorWrapper( async(req, res, next) =>{
     
 });
 
+const getDistanceBetweenWarehouses = asyncErrorWrapper( async(req, res, next) =>{
+    const { from,to} = req.params;
+  
+    const warehouseTo = await Warehouse.findById(to);
+    const warehouse = await Warehouse.findById(from);
+
+    const distance = await getDistanceFromMaps(warehouse.address, warehouseTo.address);
+   
+    
+    return res.status(200).json({
+      success: true,
+      info: distance
+    });
+});
+
 module.exports={
     getAllRequest,
     getUserFromRequest,
     getUserToRequest,
     respondRequest,
     getCreateRequest,
-    respondCreate
+    respondCreate,
+    getDistanceBetweenWarehouses
 }

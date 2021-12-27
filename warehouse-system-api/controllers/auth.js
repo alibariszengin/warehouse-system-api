@@ -84,7 +84,7 @@ const forgotPassword=asyncErrorWrapper(async(req, res ,next) =>{
     const resetPasswordToken = user.getResetPasswordTokenFromUser();
     await user.save();
     console.log("4")
-    const resetPasswordUrl = `http://localhost:3000/resetpassword?resetPasswordToken=${resetPasswordToken}`
+    const resetPasswordUrl = `https://warehouse-system-api.herokuapp.com/resetpassword?resetPasswordToken=${resetPasswordToken}`
     console.log("5")
     const emailTemplate = htmlEmailTemplate(resetPasswordUrl)
     try{

@@ -2,7 +2,7 @@ const Product = require("../models/Product");
 const Warehouse = require("../models/Warehouse");
 const CustomError = require("../helpers/error/CustomError");
 const asyncErrorWrapper = require("express-async-handler");
-
+const {getDistanceFromMaps} = require("../helpers/google/distance");
 const getAllProduct = asyncErrorWrapper(async (req, res, next) => {
   const product = await Product.find();
 
@@ -75,15 +75,20 @@ const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
   });
 });
 const transferProduct = asyncErrorWrapper(async (req, res, next) => {
-    const { products } = req.body;
+    
     const { to } = req.params;
   
     const warehouseTo = await Warehouse.findById(to);
     const warehouse = req.from;
-  
+
+    const distance = await getDistanceFromMaps(warehouse.address, warehouseTo.address);
+    req.request.about = distance;
+    await req.request.save();
+    
     return res.status(200).json({
       success: true,
       message: "Request has been taken successfully",
+      info: distance
     });
   });
 module.exports = {
