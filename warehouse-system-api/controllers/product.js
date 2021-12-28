@@ -65,13 +65,14 @@ const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
       getProduct = product;
     }
   }
-  
+  let newProducts = warehouse.populate("products");
+  newProducts = newProducts.products;
 
   console.log("finis")
 
   return res.status(200).json({
     success: true,
-    data: warehouse.products
+    data: newProducts
   });
 });
 const transferProduct = asyncErrorWrapper(async (req, res, next) => {
