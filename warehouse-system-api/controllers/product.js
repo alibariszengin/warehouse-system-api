@@ -88,7 +88,7 @@ const transferProduct = asyncErrorWrapper(async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: "Request has been taken successfully",
-      info: distance
+      info: {distance}
     });
   });
 module.exports = {
