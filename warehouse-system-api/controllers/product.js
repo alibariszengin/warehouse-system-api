@@ -71,7 +71,7 @@ const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    data: products
+    data: warehouse.products.populate("products")
   });
 });
 const transferProduct = asyncErrorWrapper(async (req, res, next) => {
