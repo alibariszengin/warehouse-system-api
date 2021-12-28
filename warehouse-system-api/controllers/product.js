@@ -82,7 +82,7 @@ const transferProduct = asyncErrorWrapper(async (req, res, next) => {
     const warehouse = req.from;
 
     const distance = await getDistanceFromMaps(warehouse.address, warehouseTo.address);
-    req.request.about = distance;
+    req.request.about = `Distance:${distance.distance} Duration:${distance.duration}`;
     await req.request.save();
     
     return res.status(200).json({
