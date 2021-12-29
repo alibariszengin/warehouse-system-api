@@ -1,0 +1,32 @@
+name: warehouse
+description: A new Flutter project.
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter  
+  cupertino_icons: ^1.0.2
+  regexpattern: ^2.0.1
+  flutter_secure_storage: ^5.0.2
+  http: ^0.13.4
+  shared_preferences: ^2.0.11
+  app_links: ^2.2.0
+  provider: ^6.0.1
+  curved_navigation_bar: ^1.0.1
+  bloc: ^8.0.1
+  flutter_bloc: ^8.0.0
+  flutter_slidable: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
