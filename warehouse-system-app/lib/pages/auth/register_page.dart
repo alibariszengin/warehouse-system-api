@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
     nameController = TextEditingController();
     mailController = TextEditingController();
     passwordController = TextEditingController();
-    formEnabled = false;
+    formEnabled = true;
   }
 
   @override
@@ -153,14 +153,14 @@ class _RegisterPageState extends State<RegisterPage> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: TextFormField(
-        controller: mailController,
+        controller: nameController,
         validator: (value) {
           if (value == null) return null;
           if (value.isEmpty) return "Name cannot be empty!";
         },
         decoration: const InputDecoration(
-          labelText: "Mail",
-          hintText: "Type your email",
+          labelText: "Name",
+          hintText: "Type your name",
           prefixIcon: Icon(
             Icons.account_circle_outlined,
             size: 32,
