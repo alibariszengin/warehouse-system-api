@@ -1,6 +1,6 @@
 # Warehouse System
 
-## Frontend Setup
+## Client Setup
 
 - Get latest Flutter framework from flutter.dev and follow the setup
 - Get Android Studio and install Android SDK
