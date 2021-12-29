@@ -27,7 +27,7 @@ class AccountPage extends StatelessWidget {
         _buildCard(
           Icons.schedule,
           "Incoming requests",
-          () => _showIncomingRequests(context), //TODO:
+          () => _showIncomingRequests(context),
         ),
         _buildCard(
           Icons.logout,
