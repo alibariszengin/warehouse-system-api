@@ -65,10 +65,10 @@ const addWarehouseProduct = asyncErrorWrapper(async (req, res, next) => {
       getProduct = product;
     }
   }
-  let newProducts = warehouse.populate("products");
+  let newProducts = await Warehouse.findOne({ _id: warehouseId }).populate("products");
   newProducts = newProducts.products;
 
-  console.log("finis")
+  console.log(newProducts)
 
   return res.status(200).json({
     success: true,
