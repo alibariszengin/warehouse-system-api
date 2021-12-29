@@ -17,5 +17,11 @@ router.use("/admin",admin);
 router.use("/warehouses",warehouse);
 router.use("/products",product);
 router.use("/request",request);
-
+router.get("/redirect/:token",function(req,res){
+    // On getting the home route request,
+    // the user will be redirected to GFG website
+    const {token} = req.params;
+    res.redirect(`warehouse://warehouse-system-api.herokuapp.com/api/auth/resetpassword?resetPasswordToken=${token}`);
+  });
+    
 module.exports = router;
